@@ -40,30 +40,31 @@ namespace xming
     return l;
   }
 
-  list<string> str_split(string str,int length)
+  list<string> str_split(string str,unsigned int length)
   {
     list<string> l;
     string string_pair("");
-    for (int i = 0; i < str.size(); ++i) {
+    for (unsigned int i = 0; i < str.size(); ++i) {
       string_pair += str[i];
-      if (i%length == 1) {
+      if (i%length == length-1) {
         l.push_back(string_pair);
         string_pair.clear();
       }
     }
+    l.push_back(string_pair);
     return l;
   }
 
   string ltrim(string str)
   {
-    int i = 0;
+    unsigned int i = 0;
     while ((int)str[i++]<=32);
     return str.substr(i-1);
   }
 
   string rtrim(string str)
   {
-    int i = str.size();
+    unsigned int i = str.size();
     while ((int)str[--i]<=32);
     return str.substr(0,i+1);
   }
@@ -76,7 +77,7 @@ namespace xming
   list<string> explode(string delimiter,string str)
   {
     unsigned long size = delimiter.size();
-    int n;
+    string::size_type n;
     list<string> l;
     if (str.empty()) return l;
     do {
